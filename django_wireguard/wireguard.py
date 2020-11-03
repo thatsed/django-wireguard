@@ -78,16 +78,12 @@ class WireGuard:
         NO_SUCH_DEVICE = 19
 
     def __init__(self, interface_name):
-        super().__init__()
+        self.__connect_backend()
         self.__ifname = interface_name
         interface = self.__get_interface_index(interface_name)
         if not interface:
             raise WireGuardException("Interface does not exist.")
         self.__ifindex = interface
-
-    def __new__(cls, *args, **kwargs):
-        cls.__connect_backend()
-        return super().__new__(*args, **kwargs)
 
     @classmethod
     def __connect_backend(cls):

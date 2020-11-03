@@ -139,7 +139,7 @@ class WireguardPeer(models.Model):
                  f"PrivateKey={private_key}\n"
 
         if self.dns:
-            config += f"DNS={self.get_dns_list()}\n"
+            config += f"DNS={self.dns}\n"
 
         config += f"[Peer]\n" \
                   f"Endpoint={self.interface.get_endpoint()}\n" \

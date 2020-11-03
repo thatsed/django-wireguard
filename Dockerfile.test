@@ -1,0 +1,24 @@
+FROM python:3.8-buster
+LABEL maintainer="romani.ae98@gmail.com"
+
+# Set environment variables
+ENV PYTHONUNBUFFERED 1
+ENV DJANGO_SETTINGS_MODULE django_wireguard.tests.testapp.settings
+
+# Install WireGuard deps
+RUN printf "deb http://httpredir.debian.org/debian buster-backports main non-free\ndeb-src http://httpredir.debian.org/debian buster-backports main non-free" > /etc/apt/sources.list.d/backports.list
+RUN apt update -y
+RUN apt install iptables iproute2 wireguard -y
+
+# Install any needed packages specified in requirements.txt
+COPY ./requirements.txt /code/requirements.txt
+RUN pip install --upgrade pip
+RUN pip install -r /code/requirements.txt
+
+# Copy the current directory contents into the container at /code/
+COPY . /code/
+
+# Set the working directory to /code/
+WORKDIR /code/
+
+CMD python manage.py test

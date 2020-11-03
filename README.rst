@@ -47,5 +47,5 @@ Testing with Docker
 -------------------
 
 1. Make sure the WireGuard kernel modules are installed and loaded on the host machine.
-2. Run `docker build -f Dockerfile.test -t django_wg_test .`
-3. Run `docker run --cap-add NET_ADMIN django_wg_test`
+2. Run ``docker build -f Dockerfile.test -t django_wg_test .``
+3. Run ``docker run --cap-add NET_ADMIN django_wg_test``

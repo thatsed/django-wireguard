@@ -17,7 +17,7 @@ class PublicKey:
     __slots__ = ('__public_key',)
 
     def __init__(self, public_key: Union[str, X25519PublicKey]):
-        if isinstance(public_key, X25519PrivateKey):
+        if isinstance(public_key, X25519PublicKey):
             self.__public_key = public_key
         elif isinstance(public_key, str):
             self.__public_key = X25519PublicKey.from_public_bytes(base64.b64decode(public_key))
@@ -66,9 +66,7 @@ class PrivateKey:
 
 
 class WireGuardException(Exception):
-    """
-
-    """
+    pass
 
 
 class WireGuard:

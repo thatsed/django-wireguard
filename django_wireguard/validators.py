@@ -20,7 +20,7 @@ def validate_private_ipv4(value):
 def validate_allowed_ips(value):
     for ip in value.split(','):
         try:
-            ip_address = ipaddress.IPv4Interface(value)
+            ip_address = ipaddress.IPv4Interface(ip)
             if not ip_address.is_private or ip_address.is_unspecified:
                 raise ValueError
         except (ValueError, ipaddress.AddressValueError):

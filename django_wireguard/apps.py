@@ -3,7 +3,7 @@ from django.apps import AppConfig
 from django.db import OperationalError
 
 
-class SimpleVpnConfig(AppConfig):
+class DjangoWireguardConfig(AppConfig):
     name = 'django_wireguard'
     verbose_name = "Django WireGuard"
 
@@ -14,3 +14,9 @@ class SimpleVpnConfig(AppConfig):
             sync_wireguard_interfaces()
         except OperationalError:
             pass
+
+
+class DjangoWireguardWagtailConfig(AppConfig):
+    name = 'django_wireguard.wagtail'
+    label = 'django_wireguard_wagtail'
+    verbose_name = "Django WireGuard Wagtail Integration"

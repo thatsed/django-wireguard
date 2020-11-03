@@ -12,8 +12,10 @@ RUN apt install iptables iproute2 wireguard -y
 
 # Install any needed packages specified in requirements.txt
 COPY ./requirements.txt /code/requirements.txt
+COPY ./django_wireguard/tests/testapp/requirements.txt /code/requirements-test.txt
+
 RUN pip install --upgrade pip
-RUN pip install -r /code/requirements.txt
+RUN pip install -r /code/requirements.txt -r /code/requirements-test.txt
 
 # Copy the current directory contents into the container at /code/
 COPY . /code/

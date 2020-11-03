@@ -5,10 +5,17 @@ from django_wireguard.models import WireguardPeer, WireguardInterface
 from django_wireguard.forms import WireguardPeerForm
 
 
+class WireguardPeerInlineAdmin(admin.StackedInline):
+    model = WireguardPeer
+    show_change_link = True
+    extra = 1
+
+
 @admin.register(WireguardInterface)
 class WireguardInterfaceAdmin(admin.ModelAdmin):
     model = WireguardInterface
-    list_display = ('name', 'address', 'listen_port')
+    list_display = ('name', 'address', 'listen_port', 'public_key')
+    inlines = [WireguardPeerInlineAdmin]
 
 
 @admin.register(WireguardPeer)
@@ -16,7 +23,7 @@ class WireguardPeerAdmin(admin.ModelAdmin):
     model = WireguardPeer
     form = WireguardPeerForm
     change_form_template = 'django_wireguard/wireguardpeer_change_form.html'
-    list_display = ('name', 'address',)
+    list_display = ('name', 'address', 'public_key')
     list_filter = ()
 
     def config(self, obj):

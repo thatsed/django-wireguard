@@ -71,8 +71,8 @@ class WireGuardException(Exception):
 
 class WireGuard:
     __slots__ = ('__ifname', '__ifindex')
-    __wg = PyRouteWireGuard()
-    __ipr = IPRoute()
+    __wg = None
+    __ipr = None
 
     class ErrorCode(Enum):
         NO_SUCH_DEVICE = 19
@@ -84,6 +84,13 @@ class WireGuard:
         if not interface:
             raise WireGuardException("Interface does not exist.")
         self.__ifindex = interface
+
+    def __new__(cls, *args, **kwargs):
+        if cls.__wg is None:
+            cls.__wg = PyRouteWireGuard()
+        if cls.__ipr is None:
+            cls.__ipr = IPRoute()
+        return super().__new__(*args, **kwargs)
 
     @classmethod
     def create_interface(cls, interface_name: str) -> 'WireGuard':

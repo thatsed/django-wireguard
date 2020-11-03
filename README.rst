@@ -5,6 +5,12 @@ Django Wireguard
 This is a Django app that provides management via Admin Site for WireGuard interfaces and peers.
 
 
+Installation
+------------
+
+Install with pip: ``pip install django-wireguard``
+
+
 Quick start
 -----------
 

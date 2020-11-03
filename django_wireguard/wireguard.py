@@ -86,19 +86,25 @@ class WireGuard:
         self.__ifindex = interface
 
     def __new__(cls, *args, **kwargs):
+        cls.__connect_backend()
+        return super().__new__(*args, **kwargs)
+
+    @classmethod
+    def __connect_backend(cls):
         if cls.__wg is None:
             cls.__wg = PyRouteWireGuard()
         if cls.__ipr is None:
             cls.__ipr = IPRoute()
-        return super().__new__(*args, **kwargs)
 
     @classmethod
     def create_interface(cls, interface_name: str) -> 'WireGuard':
+        cls.__connect_backend()
         cls.__ipr.link('add', ifname=interface_name, kind='wireguard')
         return cls(interface_name)
 
     @classmethod
     def get_or_create_interface(cls, interface_name: str) -> 'WireGuard':
+        cls.__connect_backend()
         interface = cls.__get_interface_index(interface_name)
         if not interface:
             return cls.create_interface(interface_name)
@@ -106,6 +112,7 @@ class WireGuard:
 
     @classmethod
     def __get_interface_index(cls, interface_name: str) -> Optional[int]:
+        cls.__connect_backend()
         interface: list = cls.__ipr.link_lookup(ifname=interface_name)
         if not interface:
             return None

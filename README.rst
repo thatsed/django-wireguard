@@ -39,9 +39,9 @@ Configuration
 
 The following settings can be provided:
 
-   * ``WIREGUARD_ENDPOINT`` the endpoint for the peer configuration. Set it to the server Public IP address or domain. Default: ``localhost``.
-   * ``WIREGUARD_STORE_PRIVATE_KEYS`` set this to False to disable auto generation of peer private keys. Default: ``True``.
-   * ``WIREGUARD_WAGTAIL_SHOW_IN_SETTINGS`` set this to False to show WireGuard models in root sidebar instead of settings panel. Default: ``True``.
+* ``WIREGUARD_ENDPOINT`` the endpoint for the peer configuration. Set it to the server Public IP address or domain. Default: ``localhost``.
+* ``WIREGUARD_STORE_PRIVATE_KEYS`` set this to False to disable auto generation of peer private keys. Default: ``True``.
+* ``WIREGUARD_WAGTAIL_SHOW_IN_SETTINGS`` set this to False to show WireGuard models in root sidebar instead of settings panel. Default: ``True``.
 
 Testing with Docker
 -------------------
